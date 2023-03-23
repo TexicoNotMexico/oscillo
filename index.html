@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscillo</title>
+</head>
+<body>
+    <h1>Oscillo</h1>
+
+    <button data-playing="false" role="switch" aria-checked="false">Play/Pause</button>
+    <input type="range" id="volume" min="0" max="2" value="0.8" step="0.01">
+    <input type="range" id="intensity" min="0" max="1" value="0.6" step="0.01">
+    <input type="range" id="blur" min="0" max="1" value="0.2" step="0.01"><br />
+    <canvas width="500" height="500">Oscilloscope Here</canvas>
+
+    <p>The music is <a href="https://youtu.be/OP7sTQQ0Blw">"Factory Floor"</a> by <a href="https://twitter.com/zippy731">C. Allen</a>.</p>
+    <p>License: <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)</a></p>
+
+    <audio src="./Factory Floor.wav" type="audio/wav"></audio>
+    <script type="text/javascript" src="./index.js"></script> 
+</body>
+</html>
