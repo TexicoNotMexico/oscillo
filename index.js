@@ -4,17 +4,17 @@ const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioContext = new AudioContext();
 
 // nodes
-const audioElement = document.querySelector('audio');
+let audioElement = document.querySelector('audio');
 
-const track = audioContext.createMediaElementSource(audioElement);
+let track = audioContext.createMediaElementSource(audioElement);
 
-const gainNode = audioContext.createGain();
+let gainNode = audioContext.createGain();
 
-const analyserL = audioContext.createAnalyser();
-const analyserR = audioContext.createAnalyser();
+let analyserL = audioContext.createAnalyser();
+let analyserR = audioContext.createAnalyser();
 
-const channelSplitter = audioContext.createChannelSplitter(2);
-const channelMerger = audioContext.createChannelMerger(2);
+let channelSplitter = audioContext.createChannelSplitter(2);
+let channelMerger = audioContext.createChannelMerger(2);
 
 track.connect(gainNode).connect(channelSplitter);
 
@@ -24,6 +24,29 @@ channelSplitter.connect(analyserR, 1).connect(channelMerger, 0, 1);
 channelMerger.connect(audioContext.destination);
 
 // ------ controls ------ //
+
+// file selector
+const fileSelector = document.querySelector('#fileselector');
+
+fileSelector.addEventListener('change', function(e) {
+    let srcInput = e.target;
+    if (srcInput.files.length == 0) {
+        return;
+    }
+
+    if (playButton.dataset.playing === 'true') {
+        audioElement.pause();
+        playButton.dataset.playing = 'false';
+    }
+    
+    let srcFile = srcInput.files[0];
+    let reader = new FileReader();
+    reader.onload = () => {
+        audioElement.setAttribute("src", reader.result);
+        console.log(reader.result);
+    }
+    reader.readAsDataURL(srcFile);
+}, false);
 
 // play button
 const playButton = document.querySelector('button');
